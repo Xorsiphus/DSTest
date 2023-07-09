@@ -3,6 +3,7 @@ using DSTest.Domain.Interfaces;
 using DSTest.Domain.Options;
 using DSTest.Infrastructure.Dal.Repositories;
 using DSTest.Infrastructure.Dal.Repositories.Contexts;
+using DSTest.Infrastructure.Dal.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ public static class AddInfrastructureExtension
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSingleton<IBaseRepository<WeatherEntity>, WeatherRepository>();
+        services.AddSingleton<IWeatherRepository, WeatherRepository>();
 
         services.Configure<ServiceOptions>(options =>
         {

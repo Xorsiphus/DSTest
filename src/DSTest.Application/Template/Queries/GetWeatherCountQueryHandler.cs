@@ -14,5 +14,8 @@ public class GetWeatherCountQueryHandler : IRequestHandler<GetWeatherCountQuery,
     }
 
     public async Task<int> Handle(GetWeatherCountQuery request,
-        CancellationToken cancellationToken) => await _repository.GetCount();
+        CancellationToken cancellationToken) => await _repository.GetCount(e =>
+        (request.Year == 0 || e.RecordedAt.Year.Equals(request.Year)) &&
+        (request.Month == 0 || e.RecordedAt.Month.Equals(request.Month))
+    );
 }

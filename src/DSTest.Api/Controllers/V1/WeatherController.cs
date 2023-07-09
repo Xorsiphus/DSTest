@@ -29,11 +29,22 @@ public class WeatherController : Controller
 
     [HttpGet]
     [Route("[action]")]
-    public async Task<GetTemplateResponse> GetData([FromQuery] int take, [FromQuery] int offset)
+    public async Task<GetDataResponse> GetData([FromQuery] int take, [FromQuery] int offset, [FromQuery] int year,
+        [FromQuery] int month)
     {
-        var models = await _mediator.Send(new GetWeatherDataQuery() { Take = take, Offset = offset });
-        var count = await _mediator.Send(new GetWeatherCountQuery());
+        var models = await _mediator.Send(new GetWeatherDataQuery()
+            { Take = take, Offset = offset, Year = year, Month = month });
+        var count = await _mediator.Send(new GetWeatherCountQuery { Year = year, Month = month });
+        
+        return new GetDataResponse(models, count);
+    }
 
-        return new GetTemplateResponse(models, count);
+    [HttpGet]
+    [Route("[action]")]
+    public async Task<GetStaticDataResponse> GetStaticData()
+    {
+        var years = await _mediator.Send(new GetWeatherYearsQuery());
+
+        return new GetStaticDataResponse(years);
     }
 }

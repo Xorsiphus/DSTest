@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FileService } from './file.service';
-import { WeatherFormDataModel } from '../api/request-models/weather-form-data.model';
+import { WeatherFormDataUploadModel } from '../api/request-models/weather-form-data-request.model';
 import { BaseService } from './base.service';
-import { WeatherResponseModel } from '../api/request-models/weather.model';
+import { WeatherResponseModel } from '../api/response-models/weather.model';
+import { WeatherStaticModel } from '../api/response-models/weather-static.model';
 
 @Injectable({
     providedIn: 'root'
@@ -15,24 +16,22 @@ export class WeatherService extends BaseService {
     }
 
     uploadFile(files: File[]): Observable<number> {
-        const formData = new WeatherFormDataModel();
+        const formData = new WeatherFormDataUploadModel();
         for (var i = 0; i < files.length; i++) {
             formData.AddFile(files[i]);
         }
         return this.fileService.uploadFile('/api/v1/Weather/UploadData', formData)
     }
 
-    uploadFile2(files: File[]): Observable<number> {
-        const formData = new WeatherFormDataModel();
-        for (var i = 0; i < files.length; i++) {
-            formData.AddFile(files[i]);
-        }
-        return this.fileService.uploadFile('/api/v1/Weather/UploadData', formData)
-    }
-
-    getWeatherData(take: number, offset: number): Observable<WeatherResponseModel> {
+    getWeatherData(take: number, offset: number, year: number, month: number): Observable<WeatherResponseModel> {
+        let params = { take: take, offset: offset, year: year, month: month };
         return this.httpClient.get<WeatherResponseModel>(`${this.GetOriginUrl}/api/v1/Weather/GetData`, {
-            params: { take: take, offset: offset }
+            params: new HttpParams({ fromObject: params }),
+            responseType: 'json'
         });
+    }
+
+    getWeatherStaticData(): Observable<WeatherStaticModel> {
+        return this.httpClient.get<WeatherStaticModel>(`${this.GetOriginUrl}/api/v1/Weather/GetStaticData`);
     }
 }

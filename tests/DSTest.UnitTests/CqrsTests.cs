@@ -17,7 +17,7 @@ public class CqrsTests
         var cut = new GetWeatherDataQueryHandler(baseRepository);
 
         var actual = cut.Handle(request, new CancellationToken()).Result;
-        
+
         Assert.Single(actual);
     }
 
@@ -30,9 +30,9 @@ public class CqrsTests
                 Id = 1,
             },
         };
-        
+
         var mockDbContext = new Mock<IBaseRepository<WeatherEntity>>();
-        mockDbContext.Setup(c => c.Query(1, 0).Result).Returns(db);
+        mockDbContext.Setup(c => c.Query(1, 0, e => true).Result).Returns(db);
         return mockDbContext;
     }
 }

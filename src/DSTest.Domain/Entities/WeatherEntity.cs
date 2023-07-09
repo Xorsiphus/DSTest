@@ -16,14 +16,4 @@ public class WeatherEntity : BaseEntity
     [Column("Height")] public short Height { get; set; }
     [Column("Vv")] public short Vv { get; set; }
     [Column("WeatherConditions")] public string? WeatherConditions { get; set; }
-
-
-    [Column("CreatedAt")]
-    public DateTime CreatedAt
-    {
-        get => _dateCreated ?? DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
-        set => _dateCreated = value;
-    }
-
-    private DateTime? _dateCreated;
 }

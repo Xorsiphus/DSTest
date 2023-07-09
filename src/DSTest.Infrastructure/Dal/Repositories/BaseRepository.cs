@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using DSTest.Domain.Entities;
 using DSTest.Domain.Interfaces;
 using DSTest.Infrastructure.Dal.Repositories.Contexts;
@@ -6,18 +7,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DSTest.Infrastructure.Dal.Repositories;
 
-public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity
+public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity, new()
 {
-    private readonly IServiceProvider _scopeFactory;
+    protected readonly IServiceProvider ScopeFactory;
 
     public BaseRepository(IServiceProvider scopeFactory)
     {
-        _scopeFactory = scopeFactory;
+        ScopeFactory = scopeFactory;
     }
 
     public async Task Save(T entity)
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = ScopeFactory.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<DsTestContext>();
 
         var transaction = await context.Database.BeginTransactionAsync();
@@ -37,7 +38,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity
 
     public async Task SaveAll(IEnumerable<T> entities)
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = ScopeFactory.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<DsTestContext>();
 
         var transaction = await context.Database.BeginTransactionAsync();
@@ -59,21 +60,25 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity
         await context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<T>> Query(int take, int offset)
+    public async Task<IEnumerable<T>> Query(int take, int offset, Expression<Func<T, bool>> condition)
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = ScopeFactory.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<DsTestContext>();
         return await context.Set<T>()
+            .AsQueryable()
+            .OrderByDescending(e => e.CreatedAt)
+            .Where(condition)
             .Skip(offset)
             .Take(take)
             .ToListAsync();
     }
 
-    public async Task<int> GetCount()
+    public async Task<int> GetCount(Expression<Func<T, bool>> condition)
     {
-        using var scope = _scopeFactory.CreateScope();
+        using var scope = ScopeFactory.CreateScope();
         var context = scope.ServiceProvider.GetRequiredService<DsTestContext>();
         return await context.Set<T>()
+            .Where(condition)
             .CountAsync();
     }
 }

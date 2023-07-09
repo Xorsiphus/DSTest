@@ -17,7 +17,11 @@ public class GetWeatherDataQueryHandler : IRequestHandler<GetWeatherDataQuery, I
     public async Task<IEnumerable<WeatherModel>> Handle(GetWeatherDataQuery request,
         CancellationToken cancellationToken)
     {
-        var entities = await _repository.Query(request.Take, request.Offset);
+        var entities =
+            await _repository.Query(request.Take, request.Offset,
+                e =>
+                    (request.Year == 0 || e.RecordedAt.Year.Equals(request.Year)) &&
+                    (request.Month == 0 || e.RecordedAt.Month.Equals(request.Month)));
 
         return entities
             .Select(x => new WeatherModel(

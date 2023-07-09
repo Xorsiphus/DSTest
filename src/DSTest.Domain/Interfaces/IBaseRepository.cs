@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using DSTest.Domain.Entities;
 
 namespace DSTest.Domain.Interfaces;
@@ -6,6 +7,6 @@ public interface IBaseRepository<T> where T : class, IEntity
 {
     Task Save(T entity);
     Task SaveAll(IEnumerable<T> entities);
-    Task<IEnumerable<T>> Query(int take, int offset);
-    Task<int> GetCount();
+    Task<IEnumerable<T>> Query(int take, int offset, Expression<Func<T, bool>> condition);
+    Task<int> GetCount(Expression<Func<T, bool>> condition);
 }

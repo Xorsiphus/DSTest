@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { BaseService } from './base.service';
-import { WeatherFormDataModel } from '../api/request-models/weather-form-data.model';
+import { WeatherFormDataUploadModel } from '../api/request-models/weather-form-data-request.model';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +12,7 @@ export class FileService extends BaseService {
         super(httpClient);
     }
 
-    uploadFile(url: string, model: WeatherFormDataModel): Observable<number> {
+    uploadFile(url: string, model: WeatherFormDataUploadModel): Observable<number> {
         return this.httpClient.post(this.GetOriginUrl + url, model.formData, {
             reportProgress: true,
             observe: 'events',
