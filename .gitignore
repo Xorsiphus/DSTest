@@ -1,0 +1,16 @@
+@node_modules/
+/.idea/
+/src/DSTest.Api/ClientApp/.vscode
+/src/DSTest.Api/ClientApp/.angular
+
+/src/DSTest.Api/bin
+/src/DSTest.Api/obj
+
+/src/DSTest.Application/bin
+/src/DSTest.Application/obj
+
+/src/DSTest.Domain/bin
+/src/DSTest.Domain/obj
+
+/src/DSTest.Infrastructure/bin
+/src/DSTest.Infrastructure/obj
