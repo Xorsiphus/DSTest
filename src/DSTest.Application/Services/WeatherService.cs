@@ -65,7 +65,7 @@ public class WeatherService : IWeatherService
                 break;
             case 1:
                 TimeOnly.TryParse(GetCellValue(value)?.ToString(), out var res2);
-                entity.RecordedAt = DateTime.SpecifyKind(entity.RecordedAt.Add(res2.ToTimeSpan()).AddHours(4),
+                entity.RecordedAt = DateTime.SpecifyKind(entity.RecordedAt.Add(res2.ToTimeSpan()),
                     DateTimeKind.Utc);
                 break;
             case 2:

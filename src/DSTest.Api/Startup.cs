@@ -28,7 +28,7 @@ public class Startup
         services.AddMediatR(configuration =>
         {
             configuration.Lifetime = ServiceLifetime.Scoped;
-            configuration.RegisterServicesFromAssembly(typeof(GetTemplateQuery).GetTypeInfo().Assembly);
+            configuration.RegisterServicesFromAssembly(typeof(GetWeatherDataQuery).GetTypeInfo().Assembly);
         });
         
         services.AddCors(o => o.AddPolicy(_corsPolicyName, builder =>

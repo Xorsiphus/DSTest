@@ -1,1 +1,77 @@
-<p>table works!</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="index">
+    <th mat-header-cell *matHeaderCellDef>П/п</th>
+    <td mat-cell *matCellDef="let element; let i = index">{{ i }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef>Дата</th>
+    <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="time">
+    <th mat-header-cell *matHeaderCellDef>Время</th>
+    <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="temp">
+    <th mat-header-cell *matHeaderCellDef>Температура</th>
+    <td mat-cell *matCellDef="let element">{{ element.temperature }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="air_hum">
+    <th mat-header-cell *matHeaderCellDef>Влажность воздуха</th>
+    <td mat-cell *matCellDef="let element">{{ element.airHumidity }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="dtemp">
+    <th mat-header-cell *matHeaderCellDef>Изм. Температуры</th>
+    <td mat-cell *matCellDef="let element">{{ element.temperatureDelta }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="atm_press">
+    <th mat-header-cell *matHeaderCellDef>Атмосферное давление</th>
+    <td mat-cell *matCellDef="let element">{{ element.atmospherePressure }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="wind_direct">
+    <th mat-header-cell *matHeaderCellDef>Направление ветра</th>
+    <td mat-cell *matCellDef="let element">{{ element.windDirection }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="wind_speed">
+    <th mat-header-cell *matHeaderCellDef>Скорость ветра</th>
+    <td mat-cell *matCellDef="let element">{{ element.windSpeed }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cloud">
+    <th mat-header-cell *matHeaderCellDef>Облачность %</th>
+    <td mat-cell *matCellDef="let element">{{ element.cloudiness }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="h">
+    <th mat-header-cell *matHeaderCellDef>Высота</th>
+    <td mat-cell *matCellDef="let element">{{ element.height }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="vv">
+    <th mat-header-cell *matHeaderCellDef>VV</th>
+    <td mat-cell *matCellDef="let element">{{ element.vv }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cond">
+    <th mat-header-cell *matHeaderCellDef>Погодные явления</th>
+    <td mat-cell *matCellDef="let element">{{ element.weatherConditions }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<mat-paginator
+  [length]="recordsCount"
+  [pageSize]="currentRecordsPerPage"
+  [pageSizeOptions]="[5, 15, 25, 100]"
+  aria-label="Select page"
+  (page)="handlePageEvent($event)"
+>
+</mat-paginator>

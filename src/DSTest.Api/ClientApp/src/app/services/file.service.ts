@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { BaseService } from './base.service';
 import { WeatherFormDataModel } from '../api/request-models/weather-form-data.model';
@@ -17,7 +17,8 @@ export class FileService extends BaseService {
             reportProgress: true,
             observe: 'events',
             responseType: 'text'
-        }).pipe(
+        })
+        .pipe(
             map(event => this.getUploadProgress(event)),
         );
     }

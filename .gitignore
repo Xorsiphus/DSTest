@@ -15,3 +15,6 @@
 
 /src/DSTest.Infrastructure/bin
 /src/DSTest.Infrastructure/obj
+
+/tests/DSTest.UnitTests/bin
+/tests/DSTest.UnitTests/obj

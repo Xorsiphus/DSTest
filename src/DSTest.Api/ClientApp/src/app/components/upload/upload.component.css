@@ -1,3 +1,19 @@
 .margin-bottom {
-    margin-bottom: 20px;
+    margin-bottom: 2em;
+}
+
+.lower-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.check-container {
+    margin-top: 3em;
+}
+
+.completed {
+    color: green;
+    transform: scale(3);
 }

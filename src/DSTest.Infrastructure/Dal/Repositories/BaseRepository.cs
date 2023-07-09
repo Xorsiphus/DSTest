@@ -47,6 +47,7 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity
             {
                 await context.Set<T>().AddAsync(entity);
             }
+
             await transaction.CommitAsync();
         }
         catch (Exception)
@@ -66,5 +67,13 @@ public class BaseRepository<T> : IBaseRepository<T> where T : class, IEntity
             .Skip(offset)
             .Take(take)
             .ToListAsync();
+    }
+
+    public async Task<int> GetCount()
+    {
+        using var scope = _scopeFactory.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<DsTestContext>();
+        return await context.Set<T>()
+            .CountAsync();
     }
 }

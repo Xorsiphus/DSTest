@@ -15,7 +15,7 @@ public static class AddApplicationExtension
     {
         services.AddScoped<IWeatherService, WeatherService>();
         
-        services.AddValidatorsFromAssembly(typeof(GetTemplateQuery).GetTypeInfo().Assembly);
+        services.AddValidatorsFromAssembly(typeof(GetWeatherDataQuery).GetTypeInfo().Assembly);
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         
         return services;

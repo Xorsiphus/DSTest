@@ -19,7 +19,7 @@
       Выбрать
     </button>
   </div>
-  <div>
+  <div class="lower-part">
     <button
       mat-raised-button
       color="primary"
@@ -33,5 +33,8 @@
       mode="determinate"
       [value]="progress"
     ></mat-progress-bar>
+    <div *ngIf="completed > 1" class="check-container">
+      <mat-icon class="completed">check_box</mat-icon>
+    </div>
   </div>
 </div>

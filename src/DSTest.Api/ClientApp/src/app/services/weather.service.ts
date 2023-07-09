@@ -22,6 +22,14 @@ export class WeatherService extends BaseService {
         return this.fileService.uploadFile('/api/v1/Weather/UploadData', formData)
     }
 
+    uploadFile2(files: File[]): Observable<number> {
+        const formData = new WeatherFormDataModel();
+        for (var i = 0; i < files.length; i++) {
+            formData.AddFile(files[i]);
+        }
+        return this.fileService.uploadFile('/api/v1/Weather/UploadData', formData)
+    }
+
     getWeatherData(take: number, offset: number): Observable<WeatherResponseModel> {
         return this.httpClient.get<WeatherResponseModel>(`${this.GetOriginUrl}/api/v1/Weather/GetData`, {
             params: { take: take, offset: offset }

@@ -11,7 +11,6 @@ public class WeatherEntity : BaseEntity
     [Column("TemperatureDelta")] public float TemperatureDelta { get; set; }
     [Column("AtmospherePressure")] public short AtmospherePressure { get; set; }
     [Column("WindDirection")] public string? WindDirection { get; set; }
-    [Column("value")] public string? Value { get; set; }
     [Column("WindSpeed")] public short WindSpeed { get; set; }
     [Column("Cloudiness")] public short Cloudiness { get; set; }
     [Column("Height")] public short Height { get; set; }
