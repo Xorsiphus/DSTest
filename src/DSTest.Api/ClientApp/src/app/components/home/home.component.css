@@ -1,0 +1,11 @@
+.button-offset {
+    margin-right: 50px;
+}
+
+.text-offset {
+    margin-left: 10px;
+}
+
+.icon-size {
+    transform: scale(2);
+}

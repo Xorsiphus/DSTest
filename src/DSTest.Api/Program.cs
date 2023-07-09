@@ -8,7 +8,6 @@ public class Program
             .CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(x => x.UseStartup<Startup>());
 
-        builder.Build()
-            .Run();
+        builder.Build().Run();
     }
 }

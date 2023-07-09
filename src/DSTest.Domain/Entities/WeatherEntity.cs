@@ -1,30 +1,30 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DSTest.Domain.Entities;
 
 [Table("Weather")]
-public class WeatherEntity
+public class WeatherEntity : BaseEntity
 {
-    [Key] [Column("Id")] public long Id { get; init; }
+    [Column("RecordedAt")] public DateTime RecordedAt { get; set; }
+    [Column("Temperature")] public float Temperature { get; set; }
+    [Column("AirHumidity")] public short AirHumidity { get; set; }
+    [Column("TemperatureDelta")] public float TemperatureDelta { get; set; }
+    [Column("AtmospherePressure")] public short AtmospherePressure { get; set; }
+    [Column("WindDirection")] public string? WindDirection { get; set; }
+    [Column("value")] public string? Value { get; set; }
+    [Column("WindSpeed")] public short WindSpeed { get; set; }
+    [Column("Cloudiness")] public short Cloudiness { get; set; }
+    [Column("Height")] public short Height { get; set; }
+    [Column("Vv")] public short Vv { get; set; }
+    [Column("WeatherConditions")] public string? WeatherConditions { get; set; }
 
-    [Column("RecordedAt")] public DateTime RecordedAt { get; init; }
-    [Column("Temperature")] public double Temperature { get; init; }
-    [Column("AirHumidity")] public short AirHumidity { get; init; }
-    [Column("AtmospherePressure")] public short AtmospherePressure { get; init; }
-    [Column("WindDirection")] public short WindDirection { get; init; }
-    [Column("value")] public string Value { get; init; }
-    [Column("WindSpeed")] public short WindSpeed { get; init; }
-    [Column("Cloudiness")] public short Cloudiness { get; init; }
-    [Column("Height")] public short Height { get; init; }
-    [Column("Vv")] public short Vv { get; init; }
-    [Column("WeatherConditions")] public short WeatherConditions { get; init; }
-    
-    [Column("CreatedAt")] public DateTime CreatedAt { get; init; }
 
-    public WeatherEntity(DateTime createdAt, string value)
+    [Column("CreatedAt")]
+    public DateTime CreatedAt
     {
-        CreatedAt = createdAt;
-        Value = value;
+        get => _dateCreated ?? DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
+        set => _dateCreated = value;
     }
+
+    private DateTime? _dateCreated;
 }

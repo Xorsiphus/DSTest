@@ -1,1 +1,17 @@
-aaa
+<p>
+  <mat-toolbar color="basic">
+    <a mat-button [routerLink]="'/Home'">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+    <a mat-button [routerLink]="'/Table'">
+      <mat-icon>table_chart</mat-icon>
+      <span>Table</span>
+    </a>
+    <a mat-button [routerLink]="'/Upload'">
+      <mat-icon>insert_drive_file</mat-icon>
+      <span>Upload data</span>
+    </a>
+  </mat-toolbar>
+</p>
+<router-outlet></router-outlet>

@@ -8,7 +8,7 @@ describe('UploadComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [UploadComponent]
+      imports: [UploadComponent]
     });
     fixture = TestBed.createComponent(UploadComponent);
     component = fixture.componentInstance;

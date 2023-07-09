@@ -1,1 +1,37 @@
-<p>upload works!</p>
+<div class="container">
+  <div class="margin-bottom">
+    <div *ngIf="files.length > 0">
+      <mat-list *ngFor="let file of files; let i = index" [attr.data-index]="i">
+        <mat-list-item>
+          <mat-icon matListItemIcon>attach_file</mat-icon>
+          <span>{{ file.name }} (размер {{ file.size }})</span>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <input
+      multiple
+      #fileInput
+      hidden
+      type="file"
+      (change)="onFileSelected($event)"
+    />
+    <button mat-stroked-button color="accent" (click)="fileInput.click()">
+      Выбрать
+    </button>
+  </div>
+  <div>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="uploadFile()"
+      class="margin-bottom"
+    >
+      Загрузить
+    </button>
+    <mat-progress-bar
+      *ngIf="progress !== null"
+      mode="determinate"
+      [value]="progress"
+    ></mat-progress-bar>
+  </div>
+</div>

@@ -9,6 +9,7 @@ namespace DSTest.Api;
 public class Startup
 {
     private readonly IConfiguration _configuration;
+    private readonly string _corsPolicyName = "frontend";
 
     public Startup(IConfiguration configuration)
     {
@@ -29,6 +30,13 @@ public class Startup
             configuration.Lifetime = ServiceLifetime.Scoped;
             configuration.RegisterServicesFromAssembly(typeof(GetTemplateQuery).GetTypeInfo().Assembly);
         });
+        
+        services.AddCors(o => o.AddPolicy(_corsPolicyName, builder =>
+        {
+            builder.WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        }));
     }
 
     public void Configure(IHostEnvironment environment, IApplicationBuilder app)
@@ -45,8 +53,9 @@ public class Startup
             context.Request.EnableBuffering();
             await next.Invoke();
         });
-        
+
         app.UseMiddleware<ErrorMiddleware>();
+        app.UseCors(_corsPolicyName);
 
         app.UseEndpoints(endpoints =>
         {

@@ -1,5 +1,6 @@
 @node_modules/
 /.idea/
+/.vs/
 /src/DSTest.Api/ClientApp/.vscode
 /src/DSTest.Api/ClientApp/.angular
 

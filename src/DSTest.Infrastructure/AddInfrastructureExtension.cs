@@ -1,3 +1,4 @@
+using DSTest.Domain.Entities;
 using DSTest.Domain.Interfaces;
 using DSTest.Domain.Options;
 using DSTest.Infrastructure.Dal.Repositories;
@@ -12,7 +13,7 @@ public static class AddInfrastructureExtension
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<ITemplateRepository, TemplateRepository>();
+        services.AddSingleton<IBaseRepository<WeatherEntity>, WeatherRepository>();
 
         services.Configure<ServiceOptions>(options =>
         {
