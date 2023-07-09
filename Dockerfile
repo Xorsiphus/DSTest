@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /applayers
-EXPOSE 80
+EXPOSE 5001
+EXPOSE 4200
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
@@ -23,5 +24,5 @@ RUN dotnet publish -c Release -o /app/build-dll
 FROM base AS final
 WORKDIR /app
 COPY --from=build /app/build-dll .
-ENV ASPNETCORE_URLS=http://+:80
+ENV ASPNETCORE_URLS=http://+:5001
 ENTRYPOINT ["dotnet", "DSTest.Api.dll"]
