@@ -1,8 +1,8 @@
 <div class="select">
   <mat-form-field class="margin-right">
     <mat-label>Год</mat-label>
-    <mat-select (selectionChange)="onYearChange($event)" [value]="0">
-      <mat-option value="0">Все года</mat-option>
+    <mat-select (selectionChange)="onYearChange($event)" [value]="undefined">
+      <mat-option>Все года</mat-option>
       <mat-option *ngFor="let year of years" [value]="year">
         {{ year }}
       </mat-option>
@@ -10,8 +10,8 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Месяц</mat-label>
-    <mat-select (selectionChange)="onMonthChange($event)" [value]="0">
-      <mat-option value="0">Все месяцы</mat-option>
+    <mat-select (selectionChange)="onMonthChange($event)" [value]="undefined">
+      <mat-option>Все месяцы</mat-option>
       <mat-option *ngFor="let month of months" [value]="month.number">
         {{ month.name }}
       </mat-option>
@@ -91,7 +91,7 @@
 <mat-paginator
   [length]="recordsCount"
   [pageSize]="currentRecordsPerPage"
-  [pageSizeOptions]="[5, 15, 25, 100]"
+  [pageSizeOptions]="recordsPerPage"
   [pageIndex]="currentPage"
   aria-label="Select page"
   (page)="handlePageEvent($event)"

@@ -29,8 +29,8 @@ public class WeatherController : Controller
 
     [HttpGet]
     [Route("[action]")]
-    public async Task<GetDataResponse> GetData([FromQuery] int take, [FromQuery] int offset, [FromQuery] int year,
-        [FromQuery] int month)
+    public async Task<GetDataResponse> GetData([FromQuery] int take, [FromQuery] int offset, [FromQuery] int? year,
+        [FromQuery] int? month)
     {
         var models = await _mediator.Send(new GetWeatherDataQuery()
             { Take = take, Offset = offset, Year = year, Month = month });

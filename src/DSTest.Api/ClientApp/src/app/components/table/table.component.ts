@@ -15,15 +15,15 @@ export class TableComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription | undefined;
   private staticDataSubscription: Subscription | undefined;
 
-  displayedColumns: string[] = ['index', 'date', 'time', 'temp', 'air_hum', 'dtemp', 'atm_press', 'wind_direct', 'wind_speed', 'cloud', 'h', 'vv', 'cond'];
   dataSource: MatTableDataSource<WeatherModel> = new MatTableDataSource<WeatherModel>();
   years: number[] = [];
-  currentYear: number = 0;
-  currentMonth: number = 0;
+  currentYear: number | undefined = undefined;
+  currentMonth: number | undefined = undefined;
 
   recordsCount: number = 0;
   currentPage: number = 0;
   currentRecordsPerPage: number = 15;
+  recordsPerPage: number[] = [5, 15, 25, 100];
 
   constructor(private weatherService: WeatherService) { }
 
@@ -48,7 +48,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.currentPage = 0;
     this.loadData(this.currentRecordsPerPage, 0);
   }
-  
+
   handlePageEvent(event: MatTableDataSourcePageEvent) {
     this.currentRecordsPerPage = event.pageSize;
     this.currentPage = event.pageIndex;
@@ -57,23 +57,22 @@ export class TableComponent implements OnInit, OnDestroy {
 
   loadData(take: number, offset: number) {
     this.dataSubscription = this.weatherService
-      .getWeatherData(take, offset, this.currentYear, this.currentMonth)
+      .getWeatherData({ take, offset, year: this.currentYear, month: this.currentMonth })
       .subscribe(r => {
         this.dataSource = new MatTableDataSource<WeatherModel>(r.data);
         this.recordsCount = r.count;
-      });  
+      });
   }
 
   loadStaticData() {
-      this.staticDataSubscription = this.weatherService
+    this.staticDataSubscription = this.weatherService
       .getWeatherStaticData()
       .subscribe(r => {
         this.years = r.years;
-      });   
+      });
   }
 
-  
-
+  displayedColumns: string[] = ['index', 'date', 'time', 'temp', 'air_hum', 'dtemp', 'atm_press', 'wind_direct', 'wind_speed', 'cloud', 'h', 'vv', 'cond'];
   months: MonthModel[] = [
     { number: 1, name: 'Январь' },
     { number: 2, name: 'Февраль' },

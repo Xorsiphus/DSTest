@@ -20,8 +20,8 @@ public class GetWeatherDataQueryHandler : IRequestHandler<GetWeatherDataQuery, I
         var entities =
             await _repository.Query(request.Take, request.Offset,
                 e =>
-                    (request.Year == 0 || e.RecordedAt.Year.Equals(request.Year)) &&
-                    (request.Month == 0 || e.RecordedAt.Month.Equals(request.Month)));
+                    (request.Year == null || e.RecordedAt.Year.Equals(request.Year)) &&
+                    (request.Month == null || e.RecordedAt.Month.Equals(request.Month)));
 
         return entities
             .Select(x => new WeatherModel(
