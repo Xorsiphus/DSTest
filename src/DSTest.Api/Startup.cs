@@ -1,7 +1,7 @@
 using System.Reflection;
 using DSTest.Api.Middlewares;
+using DSTest.Application.CQRS.Queries;
 using DSTest.Application.Extensions;
-using DSTest.Application.Template.Queries;
 using DSTest.Infrastructure;
 
 namespace DSTest.Api;
@@ -37,6 +37,8 @@ public class Startup
                 .AllowAnyMethod()
                 .AllowAnyHeader();
         }));
+
+        services.ApplyPendingMigrations();
     }
 
     public void Configure(IHostEnvironment environment, IApplicationBuilder app)

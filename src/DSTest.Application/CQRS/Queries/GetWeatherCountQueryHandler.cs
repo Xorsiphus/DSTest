@@ -2,7 +2,7 @@
 using DSTest.Domain.Interfaces;
 using MediatR;
 
-namespace DSTest.Application.Template.Queries;
+namespace DSTest.Application.CQRS.Queries;
 
 public class GetWeatherCountQueryHandler : IRequestHandler<GetWeatherCountQuery, int>
 {

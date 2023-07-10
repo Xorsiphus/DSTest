@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace DSTest.Application.Template.Commands;
+namespace DSTest.Application.CQRS.Commands;
 
 public class PostWeatherDataCommand: IRequest<Unit>
 {

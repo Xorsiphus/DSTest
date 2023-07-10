@@ -1,7 +1,7 @@
 ﻿using DSTest.Infrastructure.Dal.Repositories;
 using MediatR;
 
-namespace DSTest.Application.Template.Queries;
+namespace DSTest.Application.CQRS.Queries;
 
 public class GetWeatherYearsQueryHandler : IRequestHandler<GetWeatherYearsQuery, IEnumerable<int>>
 {

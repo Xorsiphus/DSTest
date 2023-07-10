@@ -1,4 +1,4 @@
-using DSTest.Application.Template.Queries;
+using DSTest.Application.CQRS.Queries;
 using DSTest.Domain.Entities;
 using DSTest.Domain.Interfaces;
 using Moq;

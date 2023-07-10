@@ -2,7 +2,7 @@ using DSTest.Domain.Entities;
 using DSTest.Domain.Interfaces;
 using MediatR;
 
-namespace DSTest.Application.Template.Commands;
+namespace DSTest.Application.CQRS.Commands;
 
 public class PostWeatherDataCommandHandler : IRequestHandler<PostWeatherDataCommand, Unit>
 {

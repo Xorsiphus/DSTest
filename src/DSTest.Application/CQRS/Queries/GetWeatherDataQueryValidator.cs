@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace DSTest.Application.Template.Queries;
+namespace DSTest.Application.CQRS.Queries;
 
 public class GetWeatherDataQueryValidator: AbstractValidator<GetWeatherDataQuery>
 {

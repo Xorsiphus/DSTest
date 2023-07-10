@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace DSTest.Application.Template.Queries;
+namespace DSTest.Application.CQRS.Queries;
 
 public class GetWeatherCountQuery : IRequest<int>
 {

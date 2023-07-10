@@ -1,6 +1,12 @@
 # DSTest proj
 
-## Развёртывание:
+# Развёртывание:
+
+## Docker:
+* ### docker-compose build --no-cache (в корне проекта)
+* ### docker-compose up (в корне проекта)
+
+## CLI:
 * ### Восстановить бд из миграций
 * ### Запустить приложения:
 ### `dotnet run` в ./src/DSTest.Api и 

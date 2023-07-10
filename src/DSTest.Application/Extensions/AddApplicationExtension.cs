@@ -1,7 +1,7 @@
 using System.Reflection;
 using DSTest.Application.Behaviours;
+using DSTest.Application.CQRS.Queries;
 using DSTest.Application.Services;
-using DSTest.Application.Template.Queries;
 using DSTest.Domain.Interfaces;
 using FluentValidation;
 using MediatR;
@@ -20,5 +20,4 @@ public static class AddApplicationExtension
         
         return services;
     }
-
 }

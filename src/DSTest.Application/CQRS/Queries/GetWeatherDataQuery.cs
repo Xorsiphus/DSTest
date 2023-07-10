@@ -1,7 +1,7 @@
 using DSTest.Domain.Models;
 using MediatR;
 
-namespace DSTest.Application.Template.Queries;
+namespace DSTest.Application.CQRS.Queries;
 
 public class GetWeatherDataQuery : IRequest<IEnumerable<WeatherModel>>
 {

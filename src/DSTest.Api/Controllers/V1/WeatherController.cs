@@ -1,7 +1,7 @@
 ﻿using DSTest.Api.Requests.V1;
 using DSTest.Api.Responses.V1;
-using DSTest.Application.Template.Commands;
-using DSTest.Application.Template.Queries;
+using DSTest.Application.CQRS.Commands;
+using DSTest.Application.CQRS.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

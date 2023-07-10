@@ -1,5 +1,6 @@
 ﻿using DSTest.Domain.Entities;
 using DSTest.Infrastructure.Dal.Repositories.Contexts;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DSTest.Infrastructure.Dal.Repositories.Impl;
@@ -17,12 +18,17 @@ public class WeatherRepository : BaseRepository<WeatherEntity>, IWeatherReposito
         
         DateTime minYear = default;
         DateTime maxYear = default;
-        await Task.Run(() =>
+        if (await context.Weather.AnyAsync())
         {
-            minYear = context.Weather.Min(w => w.RecordedAt);
-            maxYear = context.Weather.Max(w => w.RecordedAt);
-        });
+            await Task.Run(() =>
+            {
+                minYear = context.Weather.Min(w => w.RecordedAt);
+                maxYear = context.Weather.Max(w => w.RecordedAt);
+            });
 
-        return Enumerable.Range(minYear.Year, maxYear.Year - minYear.Year + 1).ToArray();
+            return Enumerable.Range(minYear.Year, maxYear.Year - minYear.Year + 1).ToArray();
+        }
+
+        return new List<int>();
     }
 }

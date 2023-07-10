@@ -3,7 +3,7 @@ using DSTest.Domain.Interfaces;
 using DSTest.Domain.Models;
 using MediatR;
 
-namespace DSTest.Application.Template.Queries;
+namespace DSTest.Application.CQRS.Queries;
 
 public class GetWeatherDataQueryHandler : IRequestHandler<GetWeatherDataQuery, IEnumerable<WeatherModel>>
 {
